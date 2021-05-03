@@ -2,7 +2,7 @@
 
 ## English
 
-### Prerrequisites
+### Prerequisites
 
 pip3 install requests
 
