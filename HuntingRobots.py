@@ -31,17 +31,21 @@ def main ():
         print ('[!] Host is down or maybe has some trouble')
 
 def checkrobot(robotsurl):
+    print('[*] Checking entries with status code 200')
+    responseok = []
     response = requests.get(robotsurl)
     content = response.text
-    
+
     for line in enumerate(content.split('\n')):
         if ("Disallow: " in line[1]):
             splited = line[1].split(" ")
             response = requests.get(f'{args.url}{splited[1]}')
             if response.status_code == 200:
-                print(f'{args.url}{splited[1]}')
-
-
+                responseok.append(splited[1])
+    if not list:
+        print(*responseok, sep='\n')
+    else:
+        print('[!] Sorry no entries, we suggest a manual check')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
